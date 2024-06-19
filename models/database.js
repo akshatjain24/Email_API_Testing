@@ -1,9 +1,10 @@
 const mysql = require('mysql');
+
 var con = mysql.createConnection({
 	host: "localhost",
 	user: "root",
 	password: "",
-	database: "whatsapp_api_testing"
+	database: "email_api"
 });
 
 con.connect(function (err) {
@@ -12,4 +13,5 @@ con.connect(function (err) {
 		return;
 	}
 })
+
 module.exports = con;

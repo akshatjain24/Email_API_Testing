@@ -1,9 +1,11 @@
 var express = require('express');
 var router = express.Router();
 
+const {redirection, submit_lead} = require('../controller/leads.js')
 /* GET home page. */
-router.get('/', function(req, res, next) {
-  res.render('index', { title: 'Express' });
-});
+router
+  .route('/')
+  .get(redirection)
+  .post(submit_lead);
 
 module.exports = router;
