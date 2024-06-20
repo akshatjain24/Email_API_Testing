@@ -6,12 +6,38 @@ function redirection(req, res) {
 }
 
 function process_lead(cat){
-    console.log("Process lead started");
     var query = "UPDATE categories SET lead_count = lead_count + 1 WHERE cat_id = (?)"
     con.query(query, [cat], (err,result)=>{
         if (err) throw err;
         console.log("Updated lead count in categories table");
     })
+}
+
+function mess_for_lead(cat_id, lead_id){
+    var query = `INSERT INTO messages (lead_ref, sched_ref, mess_date, mess_time, mess_status)
+                 SELECT 
+                     ?, 
+                     s.sched_id, 
+                     DATE_ADD(l.ref_date, INTERVAL s.day_interval DAY), 
+                     s.time, 
+                     0
+                 FROM 
+                     schedule s
+                 JOIN 
+                     leads l
+                 ON 
+                     s.category_ref = l.category_ref
+                 WHERE 
+                     s.category_ref = ?
+                 GROUP BY 
+                     s.sched_id, 
+                     l.ref_date, 
+                     s.day_interval, 
+                     s.time;`;
+    con.query(query, [lead_id, cat_id], (err, result)=>{
+        if (err) throw err;
+        console.log("Scheduled messages for the added lead")
+    });
 }
 
 function submit_lead(req, res) {
@@ -21,6 +47,8 @@ function submit_lead(req, res) {
         if (err) throw err;
         console.log('Details of Lead submitted to Database');
         process_lead(category);
+        let lead_id = result.insertId;
+        mess_for_lead(category, lead_id);
         res.redirect('/');
     });
 }
