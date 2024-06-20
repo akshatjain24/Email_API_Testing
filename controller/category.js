@@ -7,14 +7,16 @@ function submit_cat(req,res){
     con.query(query, [cat_name], (err,result)=>{
         if (err) throw err;
         console.log("Successfully inserted Category into the Database");
-        res.redirect("http://localhost:3000")
-    })
+        res.redirect('/');
+    });
 }
+
 function fetch_cat(req,res){
     var query = "SELECT cat_id, cat_name FROM categories";
     con.query(query, (err, result)=>{
         if (err) throw err;
         res.json(result)
-    })
+    });
 }
+
 module.exports = {submit_cat, fetch_cat};

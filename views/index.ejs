@@ -87,7 +87,7 @@
 								</div>
 								<div class="form-group">
 									<label for="catselect">Category</label>
-									<select id="carselect" class="form-control" name="cat_id">
+									<select id="catselect" class="form-control" name="cat_id" required>
 										<option>Choose</option>
 										<!-- Options will be dynamically populated via AJAX -->
 									</select>
@@ -95,11 +95,11 @@
 								<div class="col-sm-12 d-flex justify-content-between">
 									<div class="col-sm-5 form-group">
 										<label class="form-label" for="interval">Days Interval</label>
-										<input class="form-control col-md-12" name="interval" id="interval" />
+										<input class="form-control col-md-12" name="interval" id="interval" required/>
 									</div>
 									<div class="col-sm-6 form-group">
 										<label class="form-label" for="remain_time">Time</label>
-										<input class="form-control col-md-12" name="remain_time" id="remain_time" />
+										<input class="form-control col-md-12" name="time" id="remain_time" required/>
 									</div>
 								</div>
 
@@ -122,24 +122,11 @@
 				success: function (data) {
 					data.forEach(function (cat) {
 						$('#category').append(`<option value="${cat.cat_id}">${cat.cat_name}</option>`);
+						$('#catselect').append(`<option value="${cat.cat_id}">${cat.cat_name}</option>`);
 					})
 				},
 				error: function (err) {
 					console.error("Error fetching Category names : ", err);
-				}
-			})
-		})
-		$('#leadSelect').change(function () {
-			const lead_id = $(this).val();
-			$.ajax({
-				url: `/get_phone/${lead_id}`,
-				method: 'GET',
-				success: function (data) {
-					console.log(data.phone_no)
-					$('#leadPhone').val(data.phone_no);
-				},
-				error: function (err) {
-					console.error("Error fetching lead phone number : ", err);
 				}
 			})
 		})
