@@ -1,5 +1,6 @@
 const con = require('../models/database');
-const mysql = require('mysql2/promise');
+// const mysql = require('mysql2/promise');
+
 function redirection(req, res) {
     return res.render("index")
 }
