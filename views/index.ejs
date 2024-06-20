@@ -64,7 +64,7 @@
 								<div class="form-group">
 									<label for="category">Category</label>
 									<select id="category" class="form-control" name="category" required>
-										<option>Choose</option>
+										<option value="" selected disabled hidden>Choose</option>
 									</select>
 								</div>
 							</div>
@@ -88,9 +88,13 @@
 								<div class="form-group">
 									<label for="catselect">Category</label>
 									<select id="catselect" class="form-control" name="cat_id" required>
-										<option>Choose</option>
+										<option value="" selected disabled hidden>Choose</option>
 										<!-- Options will be dynamically populated via AJAX -->
 									</select>
+								</div>
+								<div class="form-group">
+									<label for="message">Message to be Sent</label>
+									<input class="form-control col-md-12" name="message" id="message" required />
 								</div>
 								<div class="col-sm-12 d-flex justify-content-between">
 									<div class="col-sm-5 form-group">
@@ -98,7 +102,7 @@
 										<input class="form-control col-md-12" name="interval" id="interval" required/>
 									</div>
 									<div class="col-sm-6 form-group">
-										<label class="form-label" for="remain_time">Time</label>
+										<label class="form-label" for="remain_time">Time(24-hour format)</label>
 										<input class="form-control col-md-12" name="time" id="remain_time" required/>
 									</div>
 								</div>
