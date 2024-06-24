@@ -1,4 +1,4 @@
-const mysql = require('mysql');
+var mysql = require('mysql');
 
 var con = mysql.createConnection({
 	host: "localhost",
@@ -11,7 +11,7 @@ con.connect(function (err) {
 	if (err) {
 		console.error('Unable to connect to DB: ', err);
 		return;
-	}
-})
+	}console.log("Connected to Database");
+});
 
 module.exports = con;

@@ -1,4 +1,4 @@
-const con = require('../models/database');
+const con = require('../models/connection');
 
 function submit_cat(req,res){
     let {cat_name} = req.body;
